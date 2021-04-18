@@ -15,6 +15,7 @@ def process_data():
 
 # Setting vars
 tkn = "token"
+tkn.split()
 btc_call = '{"type":"subscribe","symbol":"BINANCE:BTCUSDT"}'
 fmt = "%Y-%m-%d %H:%M:%S"
 
