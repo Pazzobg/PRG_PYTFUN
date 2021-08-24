@@ -10,20 +10,20 @@ class DataLoader():
 
     def load_data(self):
         if self.source == 'File':
-            return self.read_source_file()
+            return self._read_source_file()
         elif self.source == 'Simulation':
-            return self.read_source_simulation()
+            return self._read_source_simulation()
         else:
             raise ValueError("source type must be either of 'File' or 'Simulation'!")
 
     @staticmethod
-    def read_file_path():
+    def _read_file_path():
         # ../data/data.json     --> Location of test source file
         return input("Please insert path plus filename here, in format 'C:\\MyFiles\\data.json': ")
 
-    def read_source_file(self):
+    def _read_source_file(self):
         try:
-            filename = self.read_file_path()
+            filename = self._read_file_path()
 
             with open(filename, 'r', encoding="utf8") as file:
                 json_file = json.load(file)
@@ -34,7 +34,7 @@ class DataLoader():
             raise ValueError("Please provide a valid path to a json source file!")
 
     @staticmethod
-    def read_source_simulation():
+    def _read_source_simulation():
         output = []
 
         key_letter = rnd.choices(string.ascii_uppercase, k=1)[0]    # random.choices returns a list[]
