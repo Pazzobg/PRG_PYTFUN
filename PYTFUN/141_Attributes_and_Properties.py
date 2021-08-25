@@ -13,28 +13,28 @@ class BlackJackCard():
     def __init__(self, rank: int, suit: Suit):
         self.rank = rank
         self.suit = suit
-        self.hard = self._calc_hard_val()
-        self.soft = self._calc_soft_val()
-        self.face = self._get_face()
 
     def __str__(self):
         return f"{self.face}{self.suit} (H: {self.hard}; S: {self.soft})"
 
-    def _calc_hard_val(self):
+    @property
+    def hard(self):
         if 10 < self.rank < 14:
             return 10
         elif self.rank == 14:
             return 1
         return self.rank
 
-    def _calc_soft_val(self):
+    @property
+    def soft(self):
         if 10 < self.rank < 14:
             return 10
         elif self.rank == 14:
             return 11
         return self.rank
 
-    def _get_face(self):
+    @property
+    def face(self):
         if self.rank == 11:
             return 'J'
         elif self.rank == 12:
