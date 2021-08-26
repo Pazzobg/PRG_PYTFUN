@@ -20,18 +20,25 @@ from dataloader import DataLoader
 from dataoutputer import DataOutputer
 
 
+# Main processing method
 def run():
+    # Read the params for desired input/output from the Console
     data_source = input("Please select data source type ('File' or 'Simulation'): ").capitalize()
     data_sink = input("Please select data sink type ('Console' or 'PostgreSQL'): ").capitalize()
 
+    # Instantiate a Data Loader
     data_loader = DataLoader(source=data_source)
 
+    # Load data from the specified source
     json_data = data_loader.load_data()
 
+    # Instantiate Data Outputer
     outputer = DataOutputer(data_contents=json_data, target=data_sink)
 
+    # Send final data to specified sink
     outputer.save_data()
 
 
+# Program entry point
 if __name__ == '__main__':
     run()

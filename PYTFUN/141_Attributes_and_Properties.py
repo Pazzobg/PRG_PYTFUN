@@ -3,6 +3,8 @@ from enum import Enum
 
 
 class Suit(str, Enum):
+    """Enum containing the four suites in a card game"""
+
     Club = "♣"
     Diamond = "♦"
     Heart = "♥"
@@ -10,7 +12,33 @@ class Suit(str, Enum):
 
 
 class BlackJackCard():
+    """
+    A class representing a BlackJack card
+
+    Attributes
+    __________
+    rank: int
+        The rank of the card. Possible values between 2 and 14
+    suit: Suit
+        The suit of the card. One of four (see enum Suit)
+    face: str
+        The face of the card. Calculated attribute
+    hard: int
+        The 'hard' value of a card. Calculated attribute (note calculation for J, Q, K and A)
+    soft: int
+        The 'soft' value of a card. Calculated attribute (note calculation for J, Q, K and A)
+    """
+
     def __init__(self, rank: int, suit: Suit):
+        """
+        Parameters
+        ----------
+        rank: int
+            The rank of the card. Possible values between 2 and 14
+        suit: Suit
+            The suit of the card. One of four (see enum Suit)
+        """
+
         self.rank = rank
         self.suit = suit
 
@@ -47,6 +75,15 @@ class BlackJackCard():
 
 
 class Deck():
+    """
+    A class representing a deck of 52 shuffled cards
+
+    Methods
+    -------
+    pop()
+        Returns a BlackJack card object from the deck
+    """
+
     def __init__(self):
         self._cards = []
 
@@ -64,13 +101,30 @@ class Deck():
         return 'The deck has: \n' + deck_comp
 
     def pop(self) -> BlackJackCard:
+        """
+        Returns
+        -------
+        object
+            Returns a BlackJack card object from the deck
+        """
         card = self._cards.pop()
         print(card)
         return card
 
 
 class Hand:
+    """A class representing a hand in a BlackJack game"""
+
     def __init__(self, dealer_card: BlackJackCard, *cards: BlackJackCard) -> None:
+        """
+        Parameters
+        ----------
+        dealer_card: BlackJackCard
+            Dealer's card
+        *cards: list(BlackJackCard)
+            Player's cards
+        """
+
         self.dealer_card = dealer_card
         self._cards = list(cards)
 
@@ -86,6 +140,15 @@ class Hand:
 
 
 class Hand_Lazy(Hand):
+    """A class representing a hand in a BlackJack game. Inherits from Hand class.
+    Contains a 'total'-property which is based on a method that computes the total only when requested
+
+    Attributes
+    ----------
+    total: int
+        Lazy calculated total value of Player's hand. Considers hard and soft values of A.
+    """
+
     @property
     def total(self) -> int:
         delta_soft = max(c.soft - c.hard for c in self._cards)
@@ -108,6 +171,7 @@ class Hand_Lazy(Hand):
         self._cards.pop(-1)
 
 
+# Program entry point
 if __name__ == '__main__':
     d = Deck()
     # print(d)

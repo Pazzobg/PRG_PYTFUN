@@ -5,10 +5,46 @@ import datetime as dt
 
 
 class DataLoader():
+    """
+    Data Loader. Loads data from json file or from Simulation
+
+    Methods
+    -------
+    load_data()
+        Loads data from json file or from Simulation
+    """
+
     def __init__(self, source: str):
+        """
+        Parameters
+        ----------
+        source: str
+            The source for data ingestion. Must be either of 'File' or 'Simulation'
+
+        Returns
+        -------
+        object
+            A Data Loader object
+        """
+
         self.source = source
 
     def load_data(self):
+        """
+        Loads data from json file or from Simulation
+
+        Returns
+        -------
+        list
+            Loaded data as json array
+
+        Raises
+        ------
+        ValueError
+            If configured 'source' is neither 'File' nor 'Simulation'
+
+        """
+
         if self.source == 'File':
             return self._read_source_file()
         elif self.source == 'Simulation':
